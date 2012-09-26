@@ -2,10 +2,10 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "serialosc"
-!define PRODUCT_VERSION "1.0"
+!define PRODUCT_VERSION "1.2a"
 !define PRODUCT_PUBLISHER "monome"
 !define PRODUCT_WEB_SITE "http://monome.org/"
-!define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\serialosc.exe"
+!define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\serialoscd.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 
@@ -56,7 +56,7 @@ Section "serialosc" SEC01
   SetOutPath "$INSTDIR"
   SetOverwrite try
   File "${FILE_SRC}\libmonome.dll"
-  File "${FILE_SRC}\serialosc.exe"
+  File "${FILE_SRC}\serialoscd.exe"
   SetOutPath "$INSTDIR\monome"
   File "${FILE_SRC}\monome\protocol_40h.dll"
   File "${FILE_SRC}\monome\protocol_mext.dll"
@@ -65,15 +65,15 @@ SectionEnd
 
 Section -Post
   WriteUninstaller "$INSTDIR\uninstall.exe"
-  WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\serialosc.exe"
+  WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\serialoscd.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\uninstall.exe"
-  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\serialosc.exe"
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\serialoscd.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
   
-  SimpleSC::InstallService ${SVC_NAME} ${SVC_NAME} "16" "2" "$INSTDIR\serialosc.exe" "Bonjour Service" "" ""
+  SimpleSC::InstallService ${SVC_NAME} ${SVC_NAME} "16" "2" "$INSTDIR\serialoscd.exe" "Bonjour Service" "" ""
   SimpleSC::SetServiceDescription ${SVC_NAME} "OSC server for Monomes"
 SectionEnd
 
@@ -97,7 +97,7 @@ Section Uninstall
 
   Delete "$INSTDIR\uninstall.exe"
   Delete "$INSTDIR\libmonome.dll"
-  Delete "$INSTDIR\serialosc.exe"
+  Delete "$INSTDIR\serialoscd.exe"
   Delete "$INSTDIR\monome\protocol_series.dll"
   Delete "$INSTDIR\monome\protocol_mext.dll"
   Delete "$INSTDIR\monome\protocol_40h.dll"

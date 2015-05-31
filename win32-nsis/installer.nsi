@@ -102,6 +102,7 @@ Section Uninstall
 
   Delete "$INSTDIR\uninstall.exe"
   Delete "$INSTDIR\libmonome.dll"
+  Delete "$INSTDIR\liblo-7.dll"
   Delete "$INSTDIR\serialoscd.exe"
   Delete "$INSTDIR\serialosc-detector.exe"
   Delete "$INSTDIR\serialosc-device.exe"

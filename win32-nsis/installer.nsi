@@ -4,14 +4,14 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "serialosc"
-!define PRODUCT_VERSION "1.2a"
+!define PRODUCT_VERSION "1.4"
 !define PRODUCT_PUBLISHER "monome"
 !define PRODUCT_WEB_SITE "http://monome.org/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\serialoscd.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 
-!define FILE_SRC "\MinGW\msys\1.0\home\will\serialosc"
+!define FILE_SRC "C:\Users\wrl\Desktop\serialosc"
 !define SVC_NAME "serialosc"
 
 ; MUI 1.67 compatible ------
@@ -54,7 +54,10 @@ Section "serialosc" SEC01
   SetOutPath "$INSTDIR"
   SetOverwrite try
   File "${FILE_SRC}\libmonome.dll"
+  File "${FILE_SRC}\liblo-7.dll"
   File "${FILE_SRC}\serialoscd.exe"
+  File "${FILE_SRC}\serialosc-detector.exe"
+  File "${FILE_SRC}\serialosc-device.exe"
   SetOutPath "$INSTDIR\monome"
   File "${FILE_SRC}\monome\protocol_40h.dll"
   File "${FILE_SRC}\monome\protocol_mext.dll"
@@ -73,7 +76,7 @@ Section -Post
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
-  
+
   SimpleSC::InstallService ${SVC_NAME} ${SVC_NAME} "16" "2" "$INSTDIR\serialoscd.exe" "Bonjour Service" "" ""
   SimpleSC::SetServiceBinaryPath ${SVC_NAME} "$INSTDIR\serialoscd.exe"
   SimpleSC::SetServiceDescription ${SVC_NAME} "OSC server for Monomes"
@@ -100,6 +103,8 @@ Section Uninstall
   Delete "$INSTDIR\uninstall.exe"
   Delete "$INSTDIR\libmonome.dll"
   Delete "$INSTDIR\serialoscd.exe"
+  Delete "$INSTDIR\serialosc-detector.exe"
+  Delete "$INSTDIR\serialosc-device.exe"
   Delete "$INSTDIR\monome\protocol_series.dll"
   Delete "$INSTDIR\monome\protocol_mext.dll"
   Delete "$INSTDIR\monome\protocol_40h.dll"

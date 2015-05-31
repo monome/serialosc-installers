@@ -80,6 +80,7 @@ Section -Post
   SimpleSC::InstallService ${SVC_NAME} ${SVC_NAME} "16" "2" "$INSTDIR\serialoscd.exe" "" "" ""
   SimpleSC::SetServiceBinaryPath ${SVC_NAME} "$INSTDIR\serialoscd.exe"
   SimpleSC::SetServiceDescription ${SVC_NAME} "OSC server for Monomes"
+  SimpleSC::SetServiceDelayedAutoStartInfo ${SVC_NAME} "1"
 SectionEnd
 
 Function un.onUninstSuccess

@@ -77,7 +77,7 @@ Section -Post
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
 
-  SimpleSC::InstallService ${SVC_NAME} ${SVC_NAME} "16" "2" "$INSTDIR\serialoscd.exe" "Bonjour Service" "" ""
+  SimpleSC::InstallService ${SVC_NAME} ${SVC_NAME} "16" "2" "$INSTDIR\serialoscd.exe" "" "" ""
   SimpleSC::SetServiceBinaryPath ${SVC_NAME} "$INSTDIR\serialoscd.exe"
   SimpleSC::SetServiceDescription ${SVC_NAME} "OSC server for Monomes"
 SectionEnd

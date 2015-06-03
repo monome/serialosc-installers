@@ -1,1 +1,0 @@
-<pkg-contents spec="1.12"><f n="monome" o="root" g="admin" p="16877" pt="/usr/local/lib/monome" m="false" t="file"><f n="protocol_40h.dylib" o="root" g="admin" p="33261"/><f n="protocol_mext.dylib" o="root" g="admin" p="33261"/><f n="protocol_osc.dylib" o="root" g="admin" p="33261"/><f n="protocol_series.dylib" o="root" g="admin" p="33261"/></f></pkg-contents>

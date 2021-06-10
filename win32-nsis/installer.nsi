@@ -42,7 +42,7 @@
 
 Name "${PRODUCT_NAME}"
 OutFile "${PRODUCT_NAME}-${PRODUCT_VERSION}.exe"
-InstallDir "$PROGRAMFILES\Monome\serialosc"
+InstallDir "$PROGRAMFILES64\Monome\serialosc"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
 ShowUnInstDetails show

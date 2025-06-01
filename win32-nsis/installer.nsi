@@ -4,7 +4,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "serialosc"
-!define PRODUCT_VERSION "1.4.3"
+!define PRODUCT_VERSION "1.4.6"
 !define PRODUCT_PUBLISHER "monome"
 !define PRODUCT_WEB_SITE "http://monome.org/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\serialoscd.exe"
@@ -53,18 +53,22 @@ Section "serialosc" SEC01
 
   SetOutPath "$INSTDIR"
   SetOverwrite try
-  File "${FILE_SRC}\libmonome.dll"
-  File "${FILE_SRC}\liblo-7.dll"
   File "${FILE_SRC}\serialoscd.exe"
   File "${FILE_SRC}\serialosc-detector.exe"
   File "${FILE_SRC}\serialosc-device.exe"
-  SetOutPath "$INSTDIR\monome"
-  File "${FILE_SRC}\monome\protocol_40h.dll"
-  File "${FILE_SRC}\monome\protocol_mext.dll"
-  File "${FILE_SRC}\monome\protocol_series.dll"
 
   ; remove old serialosc executable
   Delete "$INSTDIR\serialosc.exe"
+
+  ; remove old serialosc libs
+  Delete "$INSTDIR\libmonome.dll"
+  Delete "$INSTDIR\liblo-7.dll"
+
+  Delete "$INSTDIR\monome\protocol_40h.dll"
+  Delete "$INSTDIR\monome\protocol_mext.dll"
+  Delete "$INSTDIR\monome\protocol_series.dll"
+
+  RMDir "$INSTDIR\monome"
 SectionEnd
 
 Section -Post
@@ -80,7 +84,7 @@ Section -Post
   SimpleSC::InstallService ${SVC_NAME} ${SVC_NAME} "16" "2" "$INSTDIR\serialoscd.exe" "" "" ""
   SimpleSC::SetServiceBinaryPath ${SVC_NAME} "$INSTDIR\serialoscd.exe"
   SimpleSC::SetServiceDescription ${SVC_NAME} "OSC server for Monomes"
-  SimpleSC::SetServiceDelayedAutoStartInfo ${SVC_NAME} "1"
+  ; SimpleSC::SetServiceDelayedAutoStartInfo ${SVC_NAME} "1"
 SectionEnd
 
 Function un.onUninstSuccess
